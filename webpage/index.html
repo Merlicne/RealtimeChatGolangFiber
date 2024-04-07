@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+<body>
+    <h1>Welcome to the Chat Room!</h1>
+    <label for="username">Enter your username:</label><br>
+    <input type="text" id="username" name="username" required><br><br>
+    <button id="join-chat">Join Chat Room</button>
+
+    <script>
+        document.getElementById('join-chat').addEventListener('click', (event) => {
+            event.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            if (username) {
+                localStorage.setItem('username', username);
+                window.location.href = "chatroom.html";
+            } else {
+                alert("Please enter your username.");
+            }
+        });
+    </script>
+</body>
+</html>
