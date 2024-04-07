@@ -14,7 +14,9 @@
     </form>
 
     <script>
+        
         const username = localStorage.getItem('username');
+        const room = localStorage.getItem('room');
 
         if (!username) {
             alert("Username not found!");
@@ -25,7 +27,7 @@
         const messageForm = document.getElementById('message-form');
         const messageInput = document.getElementById('message');
 
-        const ws = new WebSocket('ws://localhost:3000/ws'+"?username="+username); // WebSocket server URL
+        const ws = new WebSocket('ws://localhost:3000/ws/'+room+"?username="+username); // WebSocket server URL
 
         ws.onopen = () => {
             console.log('Connected to WebSocket server');

@@ -9,14 +9,18 @@
     <h1>Welcome to the Chat Room!</h1>
     <label for="username">Enter your username:</label><br>
     <input type="text" id="username" name="username" required><br><br>
+    <label for="username">Enter room name:</label><br>
+    <input type="text" id="room" name="room" required><br><br>
     <button id="join-chat">Join Chat Room</button>
 
     <script>
         document.getElementById('join-chat').addEventListener('click', (event) => {
             event.preventDefault();
             const username = document.getElementById('username').value.trim();
-            if (username) {
+            const room = document.getElementById('room').value.trim();
+            if (username && room) {
                 localStorage.setItem('username', username);
+                localStorage.setItem('room', room);
                 window.location.href = "chatroom.html";
             } else {
                 alert("Please enter your username.");

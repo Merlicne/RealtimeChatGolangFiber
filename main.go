@@ -9,10 +9,9 @@ func main() {
 
 	app := fiber.New()
 	server := newServer()
-	go server.running()
 	app.Static("/", "./webpage", fiber.Static{})
 	app.Get("/", serveHome)
-	app.Get("/ws", websocket.New(server.serveWS))
+	app.Get("/ws/:room", websocket.New(server.serveWS))
 	app.Listen(":3000")
 }
 
