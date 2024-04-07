@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"sync"
+	"time"
 )
 
 type RoomList map[string]*Room
@@ -68,7 +69,7 @@ func (s *Room) user_connect(c *Client) {
 	msg := " has connected "
 	log.Println(c.username + msg + "to " + s.room_name)
 	s.reChat(c)
-	go s.broadcast(newMessage([]byte(msg), c))
+	go s.broadcast(newMessage([]byte(msg), c, time.Now().Format(time.DateTime)))
 }
 
 func (s *Room) user_disconnect(c *Client) {
@@ -80,7 +81,7 @@ func (s *Room) user_disconnect(c *Client) {
 	s.Unlock()
 	msg := " has disconnected"
 	log.Println(c.username + msg + " from " + s.room_name)
-	go s.broadcast(newMessage([]byte(msg), c))
+	go s.broadcast(newMessage([]byte(msg), c, time.Now().Format(time.DateTime)))
 }
 
 func (s *Room) serve(c *Client) {

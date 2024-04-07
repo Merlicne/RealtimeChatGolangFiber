@@ -7,14 +7,17 @@
 </head>
 <body>
     <h1>Welcome to the Chat Room!</h1>
-    <label for="username">Enter your username:</label><br>
-    <input type="text" id="username" name="username" required><br><br>
-    <label for="username">Enter room name:</label><br>
-    <input type="text" id="room" name="room" required><br><br>
-    <button id="join-chat">Join Chat Room</button>
+    <form id="form-box">
+        
+        <label for="username">Enter your username:</label><br>
+        <input type="text" id="username" name="username" required><br><br>
+        <label for="username">Enter room name:</label><br>
+        <input type="text" id="room" name="room" required><br><br>
+        <button type="submit">Join Chat Room</button>
+    </form>
 
     <script>
-        document.getElementById('join-chat').addEventListener('click', (event) => {
+        document.getElementById('form-box').addEventListener('submit', (event) => {
             event.preventDefault();
             const username = document.getElementById('username').value.trim();
             const room = document.getElementById('room').value.trim();
@@ -23,7 +26,7 @@
                 localStorage.setItem('room', room);
                 window.location.href = "chatroom.html";
             } else {
-                alert("Please enter your username.");
+                alert("Please enter your username or room.");
             }
         });
     </script>

@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"log"
+	"time"
 
 	"github.com/gofiber/contrib/websocket"
 )
@@ -57,7 +58,7 @@ func (c *Client) write() {
 		}
 
 		if data.Sender == c.username {
-			c.s.incoming_msg <- newMessage([]byte(data.Text), c)
+			c.s.incoming_msg <- newMessage([]byte(data.Text), c, time.Now().Format(time.DateTime))
 		}
 
 	}
@@ -68,13 +69,15 @@ func (c *Client) read() {
 
 	for msg := range c.receive {
 		// send message to the user
-		text, sender := msg.textb, msg.sender.username
+		text, sender, pt := msg.textb, msg.sender.username, msg.ptime
 		data := struct {
 			Text   string `json:"text"`
 			Sender string `json:"sender"`
+			Ptime  string `json:"ptime"`
 		}{
 			Text:   string(text),
 			Sender: sender,
+			Ptime:  pt,
 		}
 
 		jsonData, err := json.Marshal(data)
