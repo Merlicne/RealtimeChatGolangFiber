@@ -3,7 +3,7 @@ This repo is about implementing Real Time chat (multiple room) with Golang using
 
 Server
 - Serve websocket to user that request connection
-- Navigate user to the room that user want to join
+- Navigate user to the room which user want to join
           
 Room
 - Act as a room for user to chating with other
