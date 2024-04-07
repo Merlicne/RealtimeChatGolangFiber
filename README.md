@@ -16,10 +16,4 @@ Client (user)
 - Write message and send to the room
 - Read message from room's broadcasting
  
-user -> server  -> chatroom1 // room will be create if not exist
-                -> chatroom2 
-                -> chatroom3  
-                -> chatroom4
-                .
-                .
                 .
