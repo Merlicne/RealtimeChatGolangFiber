@@ -15,5 +15,7 @@ Client (user)
 - Represent user connection
 - Write message and send to the room
 - Read message from room's broadcasting
- 
-                .
+
+Message
+- Represent message writed by a user
+- Contain text_message and Client who write the message
