@@ -4,17 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat Room</title>
+    <style>
+        /* CSS to horizontally align child elements within the form */
+        #message-form {
+            display: flex;
+            align-items: center;
+        }
+        #user-rep {
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body>
     <h1>Welcome to the Chat Room!</h1>
+    <h2 id="room-name"></h2>
     <div id="chat-box"></div>
-    <form id="message-form">
+    <form id="message-form" >
+        <p id="user-rep"></p>
         <input type="text" id="message" placeholder="Type your message...">
         <button type="submit">Send</button>
     </form>
 
     <script>
-        
+
         const username = localStorage.getItem('username');
         const room = localStorage.getItem('room');
 
@@ -23,11 +35,15 @@
             window.location.href = "index.html";
         }
 
+        const room_name = document.getElementById('room-name');
+        room_name.innerHTML = "Room : "+room
+        const user_rep = document.getElementById('user-rep');
+        user_rep.innerHTML = username + " : "
         const chatBox = document.getElementById('chat-box');
         const messageForm = document.getElementById('message-form');
         const messageInput = document.getElementById('message');
 
-        const ws = new WebSocket('ws://localhost:3000/ws/'+room+"?username="+username); // WebSocket server URL
+        const ws = new WebSocket(`ws://${window.location.host}/ws/`+room+"?username="+username); // WebSocket server URL
 
         ws.onopen = () => {
             console.log('Connected to WebSocket server');

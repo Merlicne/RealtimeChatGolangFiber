@@ -79,13 +79,12 @@ func (s *Room) user_disconnect(c *Client) {
 	}
 	s.Unlock()
 	msg := " has disconnected"
-	log.Println(c.username + msg + "from " + s.room_name)
+	log.Println(c.username + msg + " from " + s.room_name)
 	go s.broadcast(newMessage([]byte(msg), c))
 }
 
 func (s *Room) serve(c *Client) {
 	s.sub_user <- c
-	defer func() { s.unsub_user <- c }()
 	go c.write()
 	c.read()
 }

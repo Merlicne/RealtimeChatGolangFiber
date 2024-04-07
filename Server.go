@@ -17,6 +17,7 @@ func newServer() *Server {
 func (s *Server) serveWS(conn *websocket.Conn) {
 	room_name := conn.Params("room")
 	username := conn.Query("username")
+
 	r, ok := s.rooms[room_name]
 	if !ok {
 		r = newRoom(room_name)

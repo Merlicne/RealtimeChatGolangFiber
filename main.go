@@ -6,11 +6,21 @@ import (
 )
 
 func main() {
-
 	app := fiber.New()
+
+	// server start
 	server := newServer()
+	// CORS middleware
+	app.Use(func(c *fiber.Ctx) error {
+		c.Set("Access-Control-Allow-Origin", "*")
+		c.Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
+		c.Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+		return c.Next()
+	})
 	app.Static("/", "./webpage", fiber.Static{})
 	app.Get("/", serveHome)
+
+	// serve Web socket for user
 	app.Get("/ws/:room", websocket.New(server.serveWS))
 	app.Listen(":3000")
 }

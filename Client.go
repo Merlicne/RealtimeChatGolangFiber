@@ -40,6 +40,7 @@ func (c *Client) write() {
 				continue
 			}
 			log.Println("Write error :", err)
+			c.s.unsub_user <- c
 			return
 		}
 
@@ -51,6 +52,7 @@ func (c *Client) write() {
 		err = json.Unmarshal(msg, &data)
 		if err != nil {
 			log.Println("JSON decoding error:", err)
+			c.s.unsub_user <- c
 			return
 		}
 
@@ -78,12 +80,14 @@ func (c *Client) read() {
 		jsonData, err := json.Marshal(data)
 		if err != nil {
 			log.Println("JSON encoding error:", err)
+			c.s.unsub_user <- c
 			return
 		}
 
 		err = c.ws.WriteMessage(websocket.TextMessage, []byte(jsonData))
 		if err != nil {
 			log.Println("Read error :", err)
+			c.s.unsub_user <- c
 			return
 		}
 	}
