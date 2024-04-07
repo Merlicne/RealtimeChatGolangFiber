@@ -6,16 +6,16 @@ Server
 - Navigate user to the room which user want to join
           
 Room
-- Act as a room for user to chating with other
+- Act as a room for user to chatting with other
 - Manipulate user connections 
 - Receive message from every user in the room
-- Broadcast message to erery user in the room
+- Broadcast message to every user in the room
 
 Client (user)
 - Represent user connection
-- Write message and send to the room
-- Read message from room's broadcasting
+- Write a message and send to the room
+- Read incoming message from the room
 
 Message
-- Represent message writed by a user
+- Represent a message written by a user
 - Contain text_message and Client who write the message
