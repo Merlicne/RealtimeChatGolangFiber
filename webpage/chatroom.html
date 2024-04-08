@@ -63,37 +63,12 @@
             <div class="col"></div>
             <div class="col-6 pt-4 bg-body-secondary border-dark-subtle rounded-4 ">
                 <div class="container mh-100 overflow-y-auto " id="chat-box"  style="flex-direction: column-reverse;height: 480px">
-                    
-                    <!-- <section class="mb-4 row justify-content-start">
-                        <h5 class="col-auto align-middle bg-primary">Banana</h5>
-                        <div class="col-5 ">20.30</div>
-                        <div class="message-client" id="message-client">I'm sorry to hear that, Sarah. Let me look into your order for you. Can you please provide me with your order number?</div>
-                    </section>
-                    
-                    <section class="mb-4 row justify-content-end ">
-                        <div class="col-4 bg-primary inline-flexbox">20.30</div>
-                        <h5 class="col-auto align-middle bg-dark " id="username">Apple</h5>
-                        <div class="message-customer" id="message-customer">Hi there, I ordered a dress from your website last week, and it was supposed to arrive today, but it hasn't shown up yet.</div>
-                    </section> -->
-                    
-                    <!-- <section class="mb-4">
-                        <span class="message-username" id="username">Banana</span>
-                        <span class="message-time" id="time">17.30</span>
-                        <div class="message-client" id="message-client">Sure, it's #123456789.</div>
-                    </section>
-                    <section class="mb-4">
-                        <span class="message-username" id="username">Apple</span>
-                        <span class="message-time" id="time">17.35</span>
-                        <div class="message-customer" id="message-client">Sure, it's #123456789.</div>
-                    </section> -->
-
-                        
-                    
+                        <!-- Chat box -->
                 </div>
                 
                 
     
-                <!-- message -->
+                <!-- message form -->
                 <div class="input-group pt-5 mb-3 sticky-lg-bottom" id="message-box">
                     <form id="msg-form" style="display: flex;align-items: center;width : 100%;">
                         <input type="text" class="form-control" id="message-form" placeholder="type a message here." aria-label="message" aria-describedby="button-addon2">
@@ -112,6 +87,7 @@
 
 
         var createMsgBox = (username_in, ptime, messageText) => {
+            
             let msg_box = document.createElement("section");
             msg_box.classList.add("mb-4");
         

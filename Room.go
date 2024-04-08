@@ -67,9 +67,9 @@ func (s *Room) user_connect(c *Client) {
 	s.Clients[c] = true
 	s.Unlock()
 	msg := " has connected "
-	log.Println(c.username + msg + "to " + s.room_name)
+	log.Println(c.username + "(" + c.ws.IP() + ")" + msg + "to " + s.room_name)
 	s.reChat(c)
-	go s.broadcast(newMessage([]byte(msg), c, time.Now().Format(time.DateTime)))
+	go s.broadcast(newMessage([]byte(msg), c, time.Now()))
 }
 
 func (s *Room) user_disconnect(c *Client) {
@@ -80,8 +80,8 @@ func (s *Room) user_disconnect(c *Client) {
 	}
 	s.Unlock()
 	msg := " has disconnected"
-	log.Println(c.username + msg + " from " + s.room_name)
-	go s.broadcast(newMessage([]byte(msg), c, time.Now().Format(time.DateTime)))
+	log.Println(c.username + "(" + c.ws.IP() + ")" + msg + " from " + s.room_name)
+	go s.broadcast(newMessage([]byte(msg), c, time.Now()))
 }
 
 func (s *Room) serve(c *Client) {

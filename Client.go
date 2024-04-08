@@ -58,7 +58,7 @@ func (c *Client) write() {
 		}
 
 		if data.Sender == c.username {
-			c.s.incoming_msg <- newMessage([]byte(data.Text), c, time.Now().Format(time.DateTime))
+			c.s.incoming_msg <- newMessage([]byte(data.Text), c, time.Now())
 		}
 
 	}
@@ -77,7 +77,7 @@ func (c *Client) read() {
 		}{
 			Text:   string(text),
 			Sender: sender,
-			Ptime:  pt,
+			Ptime:  pt.Format(time.DateTime),
 		}
 
 		jsonData, err := json.Marshal(data)
