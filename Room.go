@@ -40,9 +40,9 @@ func (s *Room) running() {
 	for {
 		select {
 		case c := <-s.sub_user:
-			s.user_connect(c)
+			go s.user_connect(c)
 		case c := <-s.unsub_user:
-			s.user_disconnect(c)
+			go s.user_disconnect(c)
 		case msg := <-s.incoming_msg:
 			go s.broadcast(msg)
 		}
@@ -50,10 +50,12 @@ func (s *Room) running() {
 }
 
 func (s *Room) broadcast(msg *Message) {
-	for c := range s.Clients {
-		c.receive <- msg
-	}
 	s.MessageHistory = append(s.MessageHistory, msg)
+	for c := range s.Clients {
+		go func(client *Client) {
+			c.receive <- msg
+		}(c)
+	}
 }
 
 func (s *Room) reChat(c *Client) {
@@ -68,8 +70,8 @@ func (s *Room) user_connect(c *Client) {
 	s.Unlock()
 	msg := " has connected "
 	log.Println(c.username + "(" + c.ws.IP() + ")" + msg + "to " + s.room_name)
-	s.reChat(c)
 	go s.broadcast(newMessage([]byte(msg), c, time.Now()))
+	s.reChat(c)
 }
 
 func (s *Room) user_disconnect(c *Client) {

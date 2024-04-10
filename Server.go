@@ -18,14 +18,19 @@ func (s *Server) serveWS(conn *websocket.Conn) {
 	room_name := conn.Params("room")
 	username := conn.Query("username")
 
-	r, ok := s.rooms[room_name]
-	if !ok {
-		r = newRoom(room_name)
-		s.rooms[room_name] = r
-		go r.running()
-	}
+	r := s.searchRoom(room_name)
 
 	client := newClient(username, conn, r)
 
 	r.serve(client)
+}
+
+func (s *Server) searchRoom(roomname string) *Room {
+	r, ok := s.rooms[roomname]
+	if !ok {
+		r = newRoom(roomname)
+		s.rooms[roomname] = r
+		go r.running()
+	}
+	return r
 }

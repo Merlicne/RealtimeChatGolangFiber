@@ -73,7 +73,7 @@
         <!-- Navbar content -->
         <div class="container-fluid">
             <h1 class="navbar-brand ">chat demo</h1>
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" id="home-nav" href="#">
                 <span class="material-symbols-outlined">home</span>
             </a>
         </div>
@@ -187,6 +187,13 @@
                 messageInput.value = '';
             }
         });
+
+        let home = document.getElementById("home-nav");
+        home.addEventListener('click',(event)=>{
+            event.preventDefault();
+            window.localStorage.removeItem("username");
+            window.localStorage.removeItem("room");
+        })
     </script>
    
 
